@@ -25,3 +25,12 @@ else {
     Write-Host "Visual Studio installer file not found at $installerPath"
 }
 ```
+
+### Delete Bin and Obj folders
+
+```ps
+$foldersToDelete = @('*/bin/', '*/obj/', '*/.vs', './*/packages/')
+Write-Output "Deleting folders: " | %{$_ + $foldersToDelete}
+Remove-Item $foldersToDelete -Recurse -Force -ErrorAction SilentlyContinue
+pause
+```
