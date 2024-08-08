@@ -26,13 +26,12 @@ else {
 }
 ```
 
+## Folders
+
 ### Delete Bin and Obj folders
 
 ```ps
-$foldersToDelete = @('*/bin/', '*/obj/', '*/.vs', './*/packages/')
-Write-Output "Deleting folders: " | %{$_ + $foldersToDelete}
-Remove-Item $foldersToDelete -Recurse -Force -ErrorAction SilentlyContinue
-pause
+@('bin', 'obj') | %{ Get-ChildItem -Path . -Filter $_ -Recurse } | Where-Object {$_.PSIsContainer -eq $true} | Remove-Item -Recurse
 ```
 
 ### List all files in folder
